@@ -258,6 +258,33 @@ section{padding:72px 0}
 @media(max-width:900px){.area-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:540px){.area-grid{grid-template-columns:1fr}}
 
+/* Live ops map */
+.live{background:var(--white)}
+.live-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:30px;align-items:stretch}
+.map-card{background:linear-gradient(160deg,#0F4347,var(--ink));border-radius:26px;padding:18px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.map-card svg{width:100%;height:auto;display:block}
+.map-legend{position:absolute;left:18px;bottom:16px;display:flex;gap:14px;flex-wrap:wrap;font-size:.72rem;color:#BFDCD5;background:rgba(9,39,41,.55);backdrop-filter:blur(4px);padding:8px 14px;border-radius:999px}
+.map-legend span{display:inline-flex;align-items:center;gap:6px}
+.map-legend i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.status-panel{display:flex;flex-direction:column;gap:16px}
+.stat-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.stat{background:var(--mist);border:1px solid rgba(13,59,62,.07);border-radius:18px;padding:18px 20px}
+.stat .num{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.9rem;color:var(--ink);display:flex;align-items:center;gap:10px}
+.stat .num .live-dot{width:10px;height:10px;border-radius:50%;background:var(--wa);box-shadow:0 0 0 0 rgba(37,211,102,.5);animation:ring 1.8s infinite}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(37,211,102,.45)}70%{box-shadow:0 0 0 10px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
+.stat .lbl{font-size:.8rem;color:var(--muted);font-weight:600}
+.feed{background:var(--mist);border:1px solid rgba(13,59,62,.07);border-radius:18px;padding:20px;flex:1;min-height:220px}
+.feed h3{font-size:.95rem;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.feed h3 .live-dot{width:8px;height:8px;border-radius:50%;background:var(--wa);animation:pulse 2s infinite}
+.feed ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.feed li{background:var(--white);border-radius:12px;padding:11px 14px;font-size:.85rem;display:flex;justify-content:space-between;gap:12px;align-items:center;border:1px solid rgba(13,59,62,.05);animation:feedin .45s ease both}
+.feed li b{color:var(--sea)}
+.feed li time{font-size:.7rem;color:var(--muted);white-space:nowrap}
+@keyframes feedin{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.live-note{font-size:.72rem;color:var(--muted);margin-top:14px}
+@media(max-width:900px){.live-grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.stat .num .live-dot,.feed h3 .live-dot{animation:none}.feed li{animation:none}}
+
 /* Testimonials */
 .testi{background:var(--white)}
 .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
@@ -461,6 +488,107 @@ footer ul{list-style:none;display:flex;flex-direction:column;gap:9px}
   </div>
 </section>
 
+<!-- ============ LIVE OPS MAP ============ -->
+<section class="live" id="lapangan" aria-labelledby="lapangan-title">
+  <div class="container">
+    <div class="sec-head">
+      <span class="tag">Pasukan Di Lapangan</span>
+      <h2 id="lapangan-title">Lori kami sentiasa bergerak di kawasan anda.</h2>
+      <p class="answer">Setiap hari, pasukan towing Kereta Scrape bergerak merentasi KL, Selangor, Seremban dan Melaka untuk pickup dan penilaian.</p>
+    </div>
+    <div class="live-grid">
+      <!-- Stylized route map -->
+      <div class="map-card">
+        <svg viewBox="0 0 520 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Peta ilustrasi pergerakan pasukan towing Kereta Scrape dari KL ke Melaka">
+          <defs>
+            <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#9FE8D2" stop-opacity=".55"/>
+              <stop offset="100%" stop-color="#9FE8D2" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+
+          <!-- soft region blobs -->
+          <ellipse cx="215" cy="190" rx="150" ry="115" fill="#FFFFFF" opacity=".045"/>
+          <ellipse cx="350" cy="370" rx="105" ry="85" fill="#FFFFFF" opacity=".04"/>
+          <ellipse cx="425" cy="495" rx="80" ry="55" fill="#FFFFFF" opacity=".04"/>
+
+          <!-- routes -->
+          <path id="r1" d="M 90 230 C 130 235, 130 215, 150 212 C 185 208, 210 180, 258 152" fill="none" stroke="#9FE8D2" stroke-opacity=".35" stroke-width="2.5" stroke-dasharray="1 7" stroke-linecap="round"/>
+          <path id="r2" d="M 258 152 C 240 200, 220 225, 212 250 C 235 262, 265 265, 290 270" fill="none" stroke="#9FE8D2" stroke-opacity=".35" stroke-width="2.5" stroke-dasharray="1 7" stroke-linecap="round"/>
+          <path id="r3" d="M 290 270 C 310 295, 322 310, 332 330 C 344 348, 352 362, 360 382" fill="none" stroke="#9FE8D2" stroke-opacity=".35" stroke-width="2.5" stroke-dasharray="1 7" stroke-linecap="round"/>
+          <path id="r4" d="M 360 382 C 380 420, 398 455, 422 498" fill="none" stroke="#9FE8D2" stroke-opacity=".35" stroke-width="2.5" stroke-dasharray="1 7" stroke-linecap="round"/>
+          <path id="r5" d="M 200 112 C 220 125, 240 138, 258 152" fill="none" stroke="#9FE8D2" stroke-opacity=".35" stroke-width="2.5" stroke-dasharray="1 7" stroke-linecap="round"/>
+
+          <!-- active job pulses -->
+          <circle cx="212" cy="250" r="7" fill="url(#glow)">
+            <animate attributeName="r" values="7;24;7" dur="3s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="360" cy="382" r="7" fill="url(#glow)">
+            <animate attributeName="r" values="7;24;7" dur="3.6s" begin="1.2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="150" cy="212" r="7" fill="url(#glow)">
+            <animate attributeName="r" values="7;22;7" dur="3.2s" begin=".6s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- city nodes -->
+          <g fill="#E8F6F1" font-family="'Plus Jakarta Sans',sans-serif" font-size="13" font-weight="600">
+            <circle cx="200" cy="112" r="5" fill="#9FE8D2"/><text x="212" y="108">Kepong</text>
+            <circle cx="258" cy="152" r="7" fill="#FFC94D"/><text x="272" y="149" font-size="15" font-weight="700">Kuala Lumpur</text>
+            <circle cx="150" cy="212" r="5" fill="#9FE8D2"/><text x="60" y="198">Shah Alam</text>
+            <circle cx="90" cy="230" r="5" fill="#9FE8D2"/><text x="40" y="252">Klang</text>
+            <circle cx="212" cy="250" r="5" fill="#9FE8D2"/><text x="150" y="268">Puchong</text>
+            <circle cx="290" cy="270" r="5" fill="#9FE8D2"/><text x="304" y="268">Kajang</text>
+            <circle cx="332" cy="330" r="5" fill="#9FE8D2"/><text x="346" y="328">Nilai</text>
+            <circle cx="360" cy="382" r="7" fill="#FFC94D"/><text x="376" y="380" font-size="15" font-weight="700">Seremban</text>
+            <circle cx="422" cy="498" r="7" fill="#FFC94D"/><text x="330" y="520" font-size="15" font-weight="700">Melaka</text>
+          </g>
+
+          <!-- moving trucks -->
+          <g>
+            <circle r="11" fill="#25D366"/>
+            <text y="4.5" text-anchor="middle" font-size="12">🛻</text>
+            <animateMotion dur="11s" repeatCount="indefinite" rotate="0"><mpath href="#r1"/></animateMotion>
+          </g>
+          <g>
+            <circle r="11" fill="#25D366"/>
+            <text y="4.5" text-anchor="middle" font-size="12">🛻</text>
+            <animateMotion dur="13s" begin="2s" repeatCount="indefinite"><mpath href="#r3"/></animateMotion>
+          </g>
+          <g>
+            <circle r="11" fill="#25D366"/>
+            <text y="4.5" text-anchor="middle" font-size="12">🛻</text>
+            <animateMotion dur="15s" begin="4s" repeatCount="indefinite"><mpath href="#r4"/></animateMotion>
+          </g>
+        </svg>
+        <div class="map-legend">
+          <span><i style="background:#25D366"></i>Lori towing</span>
+          <span><i style="background:#FFC94D"></i>Hub utama</span>
+          <span><i style="background:#9FE8D2"></i>Kawasan aktif</span>
+        </div>
+      </div>
+
+      <!-- Status panel -->
+      <div class="status-panel">
+        <div class="stat-row">
+          <div class="stat">
+            <div class="num"><span class="live-dot" aria-hidden="true"></span><span id="driverCount">7</span></div>
+            <div class="lbl">Lori towing aktif hari ini</div>
+          </div>
+          <div class="stat">
+            <div class="num" id="pickupCount">23</div>
+            <div class="lbl">Pickup selesai minggu ini</div>
+          </div>
+        </div>
+        <div class="feed">
+          <h3><span class="live-dot" aria-hidden="true"></span>Aktiviti terkini</h3>
+          <ul id="activityFeed" aria-live="polite"></ul>
+          <p class="live-note">Paparan ilustrasi aktiviti pasukan Kereta Scrape.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ AREAS ============ -->
 <section class="areas" id="kawasan" aria-labelledby="kawasan-title">
   <div class="container">
@@ -605,5 +733,68 @@ footer ul{list-style:none;display:flex;flex-direction:column;gap:9px}
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 14.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.1 4.49.71.3 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.34zM12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.73.98 1-3.64-.24-.37a9.83 9.83 0 0 1-1.51-5.26c0-5.44 4.43-9.87 9.89-9.87a9.8 9.8 0 0 1 6.98 2.9 9.8 9.8 0 0 1 2.89 6.98c0 5.45-4.43 9.87-9.88 9.87zm8.4-18.28A11.8 11.8 0 0 0 12.04 0C5.46 0 .1 5.35.1 11.93c0 2.1.55 4.15 1.6 5.96L0 24l6.27-1.64a11.93 11.93 0 0 0 5.77 1.47h.01c6.58 0 11.94-5.35 11.94-11.93 0-3.19-1.24-6.19-3.5-8.44z"/></svg>
 </a>
 
+<script>
+(function(){
+  var feed = document.getElementById('activityFeed');
+  var driverEl = document.getElementById('driverCount');
+  var pickupEl = document.getElementById('pickupCount');
+  if(!feed) return;
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var locs = ['Cheras','Kepong','Setapak','Sentul','Bangsar','Shah Alam','Klang','Subang Jaya','Puchong','Kajang','Rawang','Ampang','Seremban 2','Senawang','Nilai','Rasah','Ayer Keroh','Batu Berendam','Melaka Tengah'];
+  var actions = [
+    ['Lori dalam perjalanan ke','🛻'],
+    ['Pickup selesai di','✅'],
+    ['Sebut harga dihantar —','💬'],
+    ['Towing sedang berjalan di','🔧'],
+    ['Penilaian kereta di','📋']
+  ];
+
+  var items = [];
+  function rand(a){ return a[Math.floor(Math.random()*a.length)]; }
+  function label(m){ return m === 0 ? 'Baru sahaja' : m + ' min lalu'; }
+
+  function newItem(){
+    var act = rand(actions);
+    var loc = rand(locs);
+    return { text: act[0] + ' <b>' + loc + '</b>', icon: act[1], mins: 0 };
+  }
+
+  function render(){
+    feed.innerHTML = items.map(function(it){
+      return '<li><span>' + it.icon + ' ' + it.text + '</span><time>' + label(it.mins) + '</time></li>';
+    }).join('');
+  }
+
+  // Seed the feed
+  var seedMins = [0, 4, 9, 17];
+  for(var i=0;i<4;i++){ var it=newItem(); it.mins=seedMins[i]; items.push(it); }
+  render();
+
+  if(reduced) return; // keep it static for reduced-motion users
+
+  // Rotate feed
+  setInterval(function(){
+    items.forEach(function(it){ it.mins += 3 + Math.floor(Math.random()*4); });
+    items.unshift(newItem());
+    if(items.length > 4) items.pop();
+    render();
+  }, 6000);
+
+  // Gentle driver count jitter (6–9)
+  setInterval(function(){
+    var n = 6 + Math.floor(Math.random()*4);
+    driverEl.textContent = n;
+  }, 14000);
+
+  // Weekly pickup count creeps up occasionally
+  setInterval(function(){
+    if(Math.random() < 0.5){
+      pickupEl.textContent = parseInt(pickupEl.textContent,10) + 1;
+    }
+  }, 25000);
+})();
+</script>
 </body>
 </html>
